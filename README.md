@@ -36,7 +36,7 @@ ZULU/
 ├── .gitignore
 ├── README.md
 ```
-# Installation, backend:
+## Installation, backend:
 ```bash
  - cd backend
  - python3 -m venv venv
@@ -46,7 +46,7 @@ ZULU/
  - python manage.py runserver # start the backend server
 ```
 
-# Installation, frontend:
+## Installation, frontend:
 ```bash
  - cd frontend
  - npm start
