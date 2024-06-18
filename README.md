@@ -38,13 +38,17 @@ ZULU/
 
 
 # Installation, backend:
- - ```bash cd backend
+```bash
+ - cd backend
  - python3 -m venv venv
  - pip install -r requirements.txt
  - python manage.py migrate # apply migrations and create database
  - python manage.py createsuperuser # create admin user
- - python manage.py runserver # start the backend server```
+ - python manage.py runserver # start the backend server
+```
 
 # Installation, frontend:
- - ```bash cd frontend
- - npm start```
+```bash
+ - cd frontend
+ - npm start
+```
