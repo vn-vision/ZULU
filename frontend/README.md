@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Project Structure
+-src: the source folder that holds the components, assets, hooks e.t.c related to ZULU
+-- assets: holds static data used for the project:: images, .css files
+-- components: most of reusable UI/UX e.g buttons, cards, lists
+-- context: allows you to share data across the component tree without having to pass props down:: themes, userInformation
+-- data: this is the json data that is used in the project:: e.g. Other API data scrapped from the internet
+-- hooks: functions that let you use state and othe React features in functional components:: manage state and side effects without needing to use class components
+-- pages: this are the different pages the user interact with:: HomePage, Property Details Page, Market Analysis page ...
+-- utils: helper functions or modules that perform specific tasks or calculations making code modular / reusable. e.g formatDate
