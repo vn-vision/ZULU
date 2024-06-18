@@ -70,11 +70,32 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 # Project Structure
--src: the source folder that holds the components, assets, hooks e.t.c related to ZULU
--- assets: holds static data used for the project:: images, .css files
--- components: most of reusable UI/UX e.g buttons, cards, lists
--- context: allows you to share data across the component tree without having to pass props down:: themes, userInformation
--- data: this is the json data that is used in the project:: e.g. Other API data scrapped from the internet
--- hooks: functions that let you use state and othe React features in functional components:: manage state and side effects without needing to use class components
--- pages: this are the different pages the user interact with:: HomePage, Property Details Page, Market Analysis page ...
--- utils: helper functions or modules that perform specific tasks or calculations making code modular / reusable. e.g formatDate
+
+### Description: brief
+- **src**: This is the source folder.
+  - **assets**: Holds static data used for the project.
+    - **images**: Contains image files used in the project.
+    - **styles.css**: CSS file(s) for styling components.
+  - **components**: Contains reusable UI/UX components.
+    - `Button.js`: Component for buttons.
+    - `Card.js`: Component for cards.
+    - `List.js`: Component for lists.
+  - **context**: Allows sharing of data across the component tree.
+    - `ThemeContext.js`: Context provider for theme-related data.
+    - `UserContext.js`: Context provider for user information.
+  - **data**: Holds JSON data used in the project.
+    - `data.json`: General project data.
+    - `otherAPIdata.json`: External API data.
+  - **hooks**: Functions enabling state and other React features in functional components.
+    - `useState.js`: Custom hook for managing state.
+    - `useEffect.js`: Custom hook for managing side effects.
+    - `useContext.js`: Custom hook for accessing context values.
+  - **pages**: Different pages the user interacts with.
+    - `HomePage.js`: Component for the homepage.
+    - `PropertyDetailsPage.js`: Component for property details page.
+    - `MarketAnalysisPage.js`: Component for market analysis page.
+  - **utils**: Helper functions or modules for specific tasks or calculations.
+    - `formatDate.js`: Utility function for date formatting.
+    - `calculateSum.js`: Utility function for mathematical calculations.
+
+**NB**: Update the README.md as you grow the project
