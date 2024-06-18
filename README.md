@@ -35,9 +35,9 @@ ZULU/
 │   ├── package.json
 ├── .gitignore
 ├── README.md
-
-# Installation, backend:
 ```
+# Installation, backend:
+```bash
  - cd backend
  - python3 -m venv venv
  - pip install -r requirements.txt
