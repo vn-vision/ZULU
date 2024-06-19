@@ -1,5 +1,6 @@
 # Zulu frontend, API, Backend Design
 
-This directory house the UI/UX design
-API endpoints
-Database Schema.
+This dir contains the:
+- UI/UX design
+- API endpoints
+- Database Schema.
