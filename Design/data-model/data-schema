@@ -1,0 +1,81 @@
+TABLE Users {
+    id SERIAL PK
+    name VARCHAR
+    email VARCHAR
+    password VARCHAR
+    created_at TIMESTAMP
+    updated_at TIMESTAMP
+}
+
+TABLE Neighborhoods {
+    id SERIAL PK
+    name VARCHAR
+    city VARCHAR
+    state VARCHAR
+    avg_price DECIMAL
+    sales_volume INT
+    created_at TIMESTAMP
+    updated_at TIMESTAMP
+}
+
+TABLE Properties {
+    id SERIAL PK
+    address VARCHAR
+    price DECIMAL
+    bedrooms INT
+    bathrooms INT
+    size DECIMAL
+    neighborhood_id INT FOREIGN KEY REFERENCES Neighborhoods(id)
+    created_at TIMESTAMP
+    updated_at TIMESTAMP
+}
+
+TABLE MarketTrends {
+    id SERIAL PK
+    location VARCHAR
+    date_range DATERANGE
+    avg_price DECIMAL
+    sales_volume INT
+    trend_type VARCHAR
+    neighborhood_id INT FOREIGN KEY REFERENCES Neighborhoods(id)
+    property_id INT FOREIGN KEY REFERENCES Properties(id)
+    created_at TIMESTAMP
+    updated_at TIMESTAMP
+}
+
+TABLE UserFeedback {
+    id SERIAL PK
+    user_id INT FOREIGN KEY REFERENCES Users(id)
+    feedback TEXT
+    rating INT
+    created_at TIMESTAMP
+    updated_at TIMESTAMP
+}
+
+TABLE PropertyImages {
+    id SERIAL PK
+    property_id INT FOREIGN KEY REFERENCES Properties(id)
+    image_url VARCHAR
+    created_at TIMESTAMP
+    updated_at TIMESTAMP
+}
+
+TABLE Predictions {
+    id SERIAL PK
+    property_id INT FOREIGN KEY REFERENCES Properties(id)
+    neighborhood_id INT FOREIGN KEY REFERENCES Neighborhoods(id)
+    predicted_price DECIMAL
+    prediction_date DATE
+    created_at TIMESTAMP
+    updated_at TIMESTAMP
+}
+
+-- Relationships
+Ref: UserFeedback.user_id > Users.id // many-to-one
+Ref: Properties.neighborhood_id > Neighborhoods.id // many-to-one
+Ref: MarketTrends.neighborhood_id > Neighborhoods.id // many-to-one
+Ref: MarketTrends.property_id > Properties.id // many-to-one
+Ref: PropertyImages.property_id > Properties.id // many-to-one
+Ref: Predictions.property_id > Properties.id // many-to-one
+Ref: Predictions.neighborhood_id > Neighborhoods.id // many-to-one
+

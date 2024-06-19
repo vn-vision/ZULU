@@ -1,0 +1,46 @@
+# *API ENDPOINTS*
+
+## User-Related Endpoints
+	GET /api/users
+		Description: Returns a list of all users.
+	POST /api/users
+		Description: Creates a new user.
+	POST /api/login
+		Description: Authenticates a user.
+
+## Market Trends Endpoints
+	GET /api/market-trends
+		Description: Fetches market trend data such as average prices, sales volume, etc.
+		Parameters: location, date_range.
+
+## Property-Related Endpoints
+	GET /api/property-details/{id}
+		Description: Fetches details of a specific property.
+		Parameters: id.
+	GET /api/property-images/{property_id}
+		Description: Fetches images of a specific property.
+		Parameters: property_id.
+	GET /api/predictions/property/{property_id}
+		Description: Fetches predictions related to a specific property.
+		Parameters: property_id.
+	GET /api/predictions/neighborhood/{neighborhood_id}
+		Description: Fetches predictions related to a specific neighborhood.
+		Parameters: neighborhood_id.
+
+## User Feedback Endpoints
+	POST /api/user-feedback
+		Description: Collects user feedback for improving the service.
+		Parameters: feedback, rating.
+	GET /api/user-feedback/{user_id}
+		Description: Fetches all feedback from a specific user.
+		Parameters: user_id.
+
+
+```
+### Explanation of API Endpoints
+
+- User-Related Endpoints: Manage user information and authentication.
+- Market trends Endpoints: Provide market trends data based on location and date range.
+- Property-Related Endpoints: Fetch property details, images, and related predictions.
+- User Feedback Endpoints: Collect and retrieve user feedback to improve the service.
+```
