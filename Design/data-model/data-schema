@@ -24,7 +24,6 @@ TABLE Properties {
     price DECIMAL
     bedrooms INT
     bathrooms INT
-    size DECIMAL
     neighborhood_id INT FOREIGN KEY REFERENCES Neighborhoods(id)
     created_at TIMESTAMP
     updated_at TIMESTAMP
