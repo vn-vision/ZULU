@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import Users
 
 class UserSerializer(serializers.ModelSerializer):
     '''
@@ -12,14 +12,14 @@ class UserSerializer(serializers.ModelSerializer):
     updated_at = serializers.DateTimeField(required=False)
 
     class Meta:
-        model = User
+        model = Users
         fields = '__all__'
     
     def create(self, validated_data):
         '''
         Create and return a new `User` instance, given the validated data.
         '''
-        return User.objects.create(**validated_data)
+        return Users.objects.create(**validated_data)
     
     def update(self, instance, validated_data):
         '''
