@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Users
 from .serializers import UserSerializer
+# from .permissions import IsAdminOrReadOnly
 
 # class based view for user
 class UserView(APIView):
@@ -13,10 +14,16 @@ class UserView(APIView):
     It handles the GET, POST, PATCH and DELETE request.
     '''
 
+    # adding permission to the view
+    permission_classes = [permissions.IsAuthenticated,]
+
     def get(self, request, id=None):
         # get a single user by id
         if id:
             result = get_object_or_404(Users, id=id)
+
+            # check object level permission
+            self.check_object_permissions(request, result)
             serializer = UserSerializer(result)
             return Response({'status':'success', 'users':serializer.data}, status=status.HTTP_200_OK)
         
@@ -29,6 +36,10 @@ class UserView(APIView):
         '''
         Create a new user record.
         '''
+        # check for staff permissions before creating a new user
+        if not request.user.is_staff:
+            return Response({'status':'error', 'message':'You do not have permission to create a new user'}, status=status.HTTP_403_FORBIDDEN) 
+        
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -51,6 +62,10 @@ class UserView(APIView):
         return Response({'status':'error', 'data':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, id=None):
+        # check for permissions before deleting a user
+        if not request.user.is_staff:
+            return Response({'status':'error', 'message':'You do not have permission to delete a user'}, status=status.HTTP_403_FORBIDDEN)
+
         # delete a record <id> if it exists
         result = get_object_or_404(Users, id=id)
         result.delete()
