@@ -81,7 +81,7 @@ class Predictions(models.Model):
     id =  models.CharField(max_length=100, primary_key=True)
     property_id = models.ForeignKey(Properties, on_delete=models.CASCADE)
     neighborhood_id = models.ForeignKey(Neighborhoods, on_delete=models.CASCADE)
-    prediction_type = models.CharField(max_length=100)
+    prediction_type = models.CharField(max_length=100, default='price')
     predicted_price = models.DecimalField(max_digits=10, decimal_places=2)
     predicted_date = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
