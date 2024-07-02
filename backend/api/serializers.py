@@ -86,6 +86,9 @@ class PropertySerializer(serializers.ModelSerializer):
         '''
         Create and return a new `Properties` instance, given the validated data.
         '''
+        neighborhood_id = validated_data.pop('neighborhood_id')
+        neighborhood = Neighborhoods.objects.get(id=neighborhood_id)
+        validated_data['neighborhood_id'] = neighborhood
         return Properties.objects.create(**validated_data)
     
     def update(self, instance, validated_data):
@@ -163,7 +166,14 @@ class UserFeedbackSerializer(serializers.ModelSerializer):
         '''
         Create and return a new `UserFeedback` instance, given the validated data.
         '''
+        user_id = validated_data.pop('user_id')
+        property_id = validated_data.pop('property_id')
+        user = Users.objects.get(id=user_id)
+        property = Properties.objects.get(id=property_id)
+        validated_data['user_id'] = user
+        validated_data['property_id'] = property
         return UserFeedback.objects.create(**validated_data)
+
     
     def update(self, instance, validated_data):
         '''
@@ -174,6 +184,7 @@ class UserFeedbackSerializer(serializers.ModelSerializer):
         instance.rating = validated_data.get('rating', instance.rating)
         instance.feedback = validated_data.get('feedback', instance.feedback)
         instance.save()
+        return instance
     
 # class PropertyImagesSerializer(serializers.ModelSerializer):
 class PropertyImagesSerializer(serializers.ModelSerializer):
@@ -181,7 +192,7 @@ class PropertyImagesSerializer(serializers.ModelSerializer):
     PropertyImagesSerializer Class for the property images model
     '''
     property_id = serializers.CharField(required=True)
-    image = serializers.ImageField(required=True)
+    image_url = serializers.ImageField(required=True)
     created_at = serializers.DateTimeField(required=False)
     updated_at = serializers.DateTimeField(required=False)
 
@@ -193,6 +204,9 @@ class PropertyImagesSerializer(serializers.ModelSerializer):
         '''
         Create and return a new `PropertyImages` instance, given the validated data.
         '''
+        property_id = validated_data.pop('property_id')
+        property = Properties.objects.get(id=property_id)
+        validated_data['property_id'] = property
         return PropertyImages.objects.create(**validated_data)
     
     def update(self, instance, validated_data):
@@ -200,7 +214,7 @@ class PropertyImagesSerializer(serializers.ModelSerializer):
         Update and return an existing `PropertyImages` instance, given the validated data.
         '''
         instance.property_id = validated_data.get('property_id', instance.property_id)
-        instance.image = validated_data.get('image', instance.image)
+        instance.image_url = validated_data.get('image', instance.image_url)
         instance.save()
 
 

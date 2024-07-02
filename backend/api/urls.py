@@ -33,13 +33,13 @@ urlpatterns = [
     path('user-feedback/<int:id>/', views.UserFeedbackView.as_view(), name='user-feedback-detail'), # For PATCH and DELETE
 
     # Handling prediction models / call to the prediction API
-    path('predictions/', views.PredictionView.as_view(), name='predictions-list'), # For GET and POST
-    path('predictions/property/<int:id>/', views.PredictionView.as_view(), name='property-predictions-detail'), # For PATCH and DELETE
-    path('predictions/neighborhood/<int:id>/', views.PredictionView.as_view(), name='neighborhood-predictions-detail'), # For PATCH and DELETE
+    path('predictions/', views.PredictionsView.as_view(), name='predictions-list'), # For GET and POST
+    path('predictions/property/<int:id>/', views.PredictionsView.as_view(), name='property-predictions-detail'), # For PATCH and DELETE
+    path('predictions/neighborhood/<int:id>/', views.PredictionsView.as_view(), name='neighborhood-predictions-detail'), # For PATCH and DELETE
     
 
     # Handling property images models / call to the property images API
-    path('property-images/', views.PropertyImageView.as_view(), name='property-images-list'), # For GET and POST
-    path('property-images/<int:id>/', views.PropertyImageView.as_view(), name='property-images-detail'), # For PATCH and DELETE
+    path('property-images/', views.PropertyImagesView.as_view(), name='property-images-list'), # For GET and POST
+    path('property-images/<int:id>/', views.PropertyImagesView.as_view(), name='property-images-detail'), # For PATCH and DELETE
 
 ]

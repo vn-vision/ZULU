@@ -95,10 +95,19 @@ class PropertyView(APIView):
         serializers = PropertySerializer(result, many=True)   
         return Response({'status': 'success', 'properties': serializers.data}, status=status.HTTP_200_OK)
     
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         '''
         Create a new property record.
+        refereces a neighborhood id to the property
         '''
+        data = request.data
+        neighborhood_id = data.get('neighborhood_id')
+        if not neighborhood_id:
+            return Response({'status':'error', 'message':'Please provide a neighborhood id'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        neighborhood = get_object_or_404(Neighborhoods, id=neighborhood_id)
+        data['neighborhood_id'] = neighborhood.id
+
         serializer = PropertySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -198,12 +207,39 @@ class UserFeedbackView(APIView):
         '''
         Create a new user feedback record.
         '''
+        data = request.data
+        user_id = data.get('user_id')
+        property_id = data.get('property_id')
+        if not user_id or not property_id:
+            return Response({'status':'error', 'message':'Please provide a user id and property id'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        user = get_object_or_404(Users, id=user_id)
+        property = get_object_or_404(Properties, id=property_id)
+        data['user_id'] = user.id
+        data['property_id'] = property.id
+
         serializer = UserFeedbackSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response({'status':'success', 'data': serializer.data}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+    def patch(self, request, id):
+        '''
+        Fetch the given id record that is to be update.
+        '''
+        result = get_object_or_404(UserFeedback, id=id)
+        serializer = UserFeedbackSerializer(result, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'status':'success', 'data':serializer.data}, status=status.HTTP_200_OK)
+        return Response({'status':'error', 'data':serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, id):
+        # delete a record <id> if it exists
+        result = get_object_or_404(UserFeedback, id=id)
+        result.delete()
+        return Response({"status":"success", "data":"Record deleted"}, status=status.HTTP_204_NO_CONTENT)
 
 class PropertyImagesView(APIView):
     '''
@@ -226,6 +262,14 @@ class PropertyImagesView(APIView):
         '''
         Create a new property image record.
         '''
+        data = request.data
+        property_id = data.get('property_id')
+        if not property_id:
+            return Response({'status':'error', 'message':'Please provide a property id'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        property = get_object_or_404(Properties, id=property_id)
+        data['property_id'] = property.id
+        
         serializer = PropertyImagesSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
